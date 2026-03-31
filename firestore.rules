@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /certificates/{document} {
+      // Anyone can create a certificate (unauthenticated form submission).
+      // Validate required fields and enforce size limits to prevent abuse.
+      allow create: if request.resource.data.keys().hasAll(['name', 'email', 'createdAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 200
+        && request.resource.data.email is string
+        && request.resource.data.email.size() > 0
+        && request.resource.data.email.size() <= 254
+        && request.resource.data.email.matches('[^@]+@[^@]+\\.[^@]+')
+        && request.resource.data.createdAt is string
+        && request.resource.data.keys().size() <= 8;
+      // Only authenticated users can read, update, or delete certificates
+      allow read, update, delete: if request.auth != null;
+    }
+  }
+}
