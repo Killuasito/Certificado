@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { db } from "../firebase/config";
 import { collection, addDoc } from "firebase/firestore";
-import { FiUser, FiMail, FiFileText } from "react-icons/fi";
+import { FiUser, FiMail, FiFileText, FiLock } from "react-icons/fi";
 import { pdf } from "@react-pdf/renderer";
 import CertificateTemplate from "../components/CertificateTemplate";
+
+const SPECIAL_PASSWORD = "participante@sarau.fics.2026";
 
 
 function CertificateForm() {
@@ -14,6 +16,7 @@ function CertificateForm() {
     isInstitutionStudent: false,
     course: "",
     semester: "1°",
+    password: "",
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -29,6 +32,7 @@ function CertificateForm() {
       });
 
       // Generate PDF
+      const hours = formData.password === SPECIAL_PASSWORD ? 20 : 5;
       const blob = await pdf(
         <CertificateTemplate
           name={formData.name}
@@ -39,6 +43,7 @@ function CertificateForm() {
           })}
           course={formData.course}
           semester={formData.semester}
+          hours={hours}
         />
       ).toBlob();
 
@@ -192,6 +197,21 @@ function CertificateForm() {
                 </div>
               </div>
             )}
+          </div>
+
+          <div className="relative rounded-md shadow-sm">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <FiLock className="h-5 w-5 text-gray-400" />
+            </div>
+            <input
+              type="password"
+              className="focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 transition duration-150 ease-in-out"
+              placeholder="Senha (opcional)"
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+            />
           </div>
 
           <button
