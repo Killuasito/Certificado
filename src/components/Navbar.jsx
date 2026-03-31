@@ -13,7 +13,7 @@ function Navbar() {
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
             <FiAward className="text-blue-500 text-2xl" />
-            <span className="font-bold text-xl">Sarau FICS</span>
+            <span className="font-bold text-xl">Sarau FICS 2.0</span>
           </Link>
 
           {/* Mobile menu button */}
