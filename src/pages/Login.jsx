@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { FiMail, FiLock } from "react-icons/fi";
 
-const ALLOWED_ADMIN_EMAIL = "tififerreira@gmail.com";
+const ALLOWED_ADMIN_EMAILS = ["tififerreira@gmail.com", "sarau@fics.com.br"];
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -17,7 +17,7 @@ function Login() {
     e.preventDefault();
 
     // Verifica se o email é o permitido antes de tentar fazer login
-    if (email !== ALLOWED_ADMIN_EMAIL) {
+    if (!ALLOWED_ADMIN_EMAILS.includes(email)) {
       setError("Este e-mail não tem permissão para acessar o sistema.");
       return;
     }
