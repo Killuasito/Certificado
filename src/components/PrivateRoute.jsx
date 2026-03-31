@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
-const ALLOWED_ADMIN_EMAIL = "tififerreira@gmail.com";
+const ALLOWED_ADMIN_EMAILS = ["tififerreira@gmail.com", "sarau@fics.com.br"];
 
 function PrivateRoute({ children }) {
   const { currentUser } = useAuth();
@@ -11,7 +11,7 @@ function PrivateRoute({ children }) {
     return <Navigate to="/login" />;
   }
 
-  if (currentUser.email !== ALLOWED_ADMIN_EMAIL) {
+  if (!ALLOWED_ADMIN_EMAILS.includes(currentUser.email)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="bg-white p-8 rounded-xl shadow-lg max-w-md">
