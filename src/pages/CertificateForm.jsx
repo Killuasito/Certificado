@@ -5,7 +5,7 @@ import { FiUser, FiMail, FiFileText, FiLock } from "react-icons/fi";
 import { pdf } from "@react-pdf/renderer";
 import CertificateTemplate from "../components/CertificateTemplate";
 
-const SPECIAL_PASSWORD = "participante@sarau.fics.2026";
+const SPECIAL_PASSWORD = "apresentador@sarau.fics.2026";
 
 
 function CertificateForm() {
