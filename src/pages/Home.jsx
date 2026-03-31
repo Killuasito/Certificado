@@ -11,7 +11,7 @@ function Home() {
         </h1>
 
         <p className="text-xl text-gray-700 mb-8">
-          Gere seu certificado do Sarau FICS de forma rápida e simples.
+          Gere seu certificado do Sarau FICS 2.0 de forma rápida e simples.
         </p>
 
         <Link
