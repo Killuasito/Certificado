@@ -32,7 +32,7 @@ function CertificateForm() {
       });
 
       // Generate PDF
-      const hours = formData.password === SPECIAL_PASSWORD ? 20 : 5;
+      const hours = formData.password === SPECIAL_PASSWORD ? 15 : 5;
       const blob = await pdf(
         <CertificateTemplate
           name={formData.name}
